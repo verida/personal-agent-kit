@@ -1,60 +1,81 @@
 import { BaseDataSchema } from "./base";
-import CONFIG from "../../config"
+import { SCHEMAS } from "../schemas";
 import { CouchDBQuerySchemaType } from "../interfaces";
 
-const MAX_FILE_LENGTH = 10000
+const MAX_FILE_LENGTH = 10000;
 
+/**
+ *
+ */
 class FileDataSchema implements BaseDataSchema {
+  /**
+   *
+   */
+  public getUrl(): string {
+    return SCHEMAS.FILE;
+  }
 
-    public getUrl(): string {
-        return CONFIG.verida.schemas.FILE
-    }
+  /**
+   *
+   */
+  public getTimestampField(): string {
+    return "insertedAt";
+  }
 
-    public getTimestamp(row: any): string {
-        return row.insertedAt
-    }
+  /**
+   *
+   * @param row
+   */
+  public getGroupId(row: any): string | undefined {
+    return undefined;
+  }
 
-    public getTimestampField(): string {
-        return "insertedAt"
-    }
+  /**
+   *
+   */
+  public getName(): string {
+    return "File";
+  }
 
-    public getGroupId(row: any): string | undefined {
-        return undefined
-    }
+  /**
+   *
+   */
+  public getLabel(): string {
+    return "File";
+  }
 
-    public getRagContent(row: any): string {
-        return `[ File ]\nID: ${row._id}\nFile name: ${row.name}\nFile content:${row.contentText.substring(0, MAX_FILE_LENGTH)}\nSource:${row.sourceApplication})\n\n`
-    }
-    
-    public getName(): string {
-        return "File"
-    }
+  /**
+   *
+   */
+  public getDescription(): string {
+    return "my files and documents";
+  }
 
-    public getLabel(): string {
-        return "File"
-    }
-    
-    public getDescription(): string {
-        return "my files and documents"
-    }
-    
-    public getStoreFields(): string[] {
-        return ['_id', 'insertedAt']
-    }
-    
-    public getIndexFields(): string[] {
-        return ['name', 'contentText', 'indexableText', 'sourceApplication', "modifiedAt", "insertedAt"]
-    }
-    
-    public getDefaultQueryParams(): Partial<CouchDBQuerySchemaType> {
-        return {
-            fields: ['_id', 'name', 'size', 'contentText', 'uri', 'extension', 'mimeType', 'insertedAt', 'sourceApplication'],
-            sort: [{ "insertedAt": "desc" }]
-        }
-    }
-    
-    public getQuerySchemaString(): string {
-        return `
+  /**
+   *
+   */
+  public getDefaultQueryParams(): Partial<CouchDBQuerySchemaType> {
+    return {
+      fields: [
+        "_id",
+        "name",
+        "size",
+        "contentText",
+        "uri",
+        "extension",
+        "mimeType",
+        "insertedAt",
+        "sourceApplication",
+      ],
+      sort: [{ insertedAt: "desc" }],
+    };
+  }
+
+  /**
+   *
+   */
+  public getQuerySchemaString(): string {
+    return `
 {
     "_id": {
         "title": "ID",
@@ -104,8 +125,7 @@ class FileDataSchema implements BaseDataSchema {
     }
 }
 `;
-    }
-
+  }
 }
 
-export default new FileDataSchema()
+export default new FileDataSchema();

@@ -1,58 +1,61 @@
 import { BaseDataSchema } from "./base";
-import CONFIG from "../../config"
+import { SCHEMAS } from "../schemas";
 import { CouchDBQuerySchemaType } from "../interfaces";
 
+/**
+ *
+ */
 class PostDataSchema implements BaseDataSchema {
+  /**
+   *
+   */
+  public getUrl(): string {
+    return SCHEMAS.POST;
+  }
 
-    public getUrl(): string {
-        return CONFIG.verida.schemas.POST
-    }
+  /**
+   *
+   */
+  public getTimestampField(): string {
+    return "insertedAt";
+  }
 
-    public getTimestamp(row: any): string {
-        return row.insertedAt
-    }
+  /**
+   *
+   */
+  public getName(): string {
+    return "SocialPost";
+  }
 
-    public getTimestampField(): string {
-        return "insertedAt"
-    }
+  /**
+   *
+   */
+  public getLabel(): string {
+    return "Social Post";
+  }
 
-    public getGroupId(row: any): string | undefined {
-        return undefined
-    }
+  /**
+   *
+   */
+  public getDescription(): string {
+    return "my social media posts";
+  }
 
-    public getRagContent(row: any): string {
-        return `[ Social Post ]\nID: ${row._id}\nName: ${row.name}\nType: ${row.type}\nContent: ${row.content}\nURL: ${row.uri}\nSource: ${row.fromName} (${row.fromHandle}) via ${row.sourceApplication}})\n\n`
-    }
+  /**
+   *
+   */
+  public getDefaultQueryParams(): Partial<CouchDBQuerySchemaType> {
+    return {
+      fields: ["_id", "name", "type", "content", "uri", "sourceApplication"],
+      sort: [{ insertedAt: "desc" }],
+    };
+  }
 
-    public getName(): string {
-        return "SocialPost"
-    }
-    
-    public getLabel(): string {
-        return "Social Post"
-    }
-    
-    public getDescription(): string {
-        return "my social media posts"
-    }
-    
-    public getStoreFields(): string[] {
-        return ['_id', 'name','content','type','uri','insertedAt']
-    }
-    
-    public getIndexFields(): string[] {
-        return ['name', 'content', 'indexableText','sourceApplication']
-    }
-    
-    public getDefaultQueryParams(): Partial<CouchDBQuerySchemaType> {
-        return {
-            fields: ['_id', 'name', 'type', 'content', 'uri', 'sourceApplication'],
-            sort: [{ "insertedAt": "desc" }]
-        }
-    }
-    
-    public getQuerySchemaString(): string {
-        return `
+  /**
+   *
+   */
+  public getQuerySchemaString(): string {
+    return `
 {
     "_id": {
         "title": "ID",
@@ -98,8 +101,7 @@ class PostDataSchema implements BaseDataSchema {
     }
 }
 `;
-    }
-
+  }
 }
 
-export default new PostDataSchema()
+export default new PostDataSchema();

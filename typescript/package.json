@@ -3,7 +3,8 @@
     "private": true,
     "workspaces": [
       "personalagentkit",
-      "extensions/langchain"
+      "extensions/langchain",
+      "examples/chatbot"
     ],
     "packageManager": "yarn@1.22.22",
     "scripts": {

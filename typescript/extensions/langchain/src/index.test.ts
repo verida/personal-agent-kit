@@ -1,30 +1,43 @@
-/**
- * Main exports for the CDP Langchain package
- */
-
 import { z } from "zod";
-import { StructuredTool, tool } from "@langchain/core/tools";
+import { getLangChainTools } from "./index";
 import { PersonalAgentKit, Action } from "@verida/personalagentkit";
 
-/**
- * Get Langchain tools from an AgentKit instance
- *
- * @param agentKit - The AgentKit instance
- * @returns An array of Langchain tools
- */
-export async function getLangChainTools(agentKit: PersonalAgentKit): Promise<StructuredTool[]> {
-  const actions: Action[] = agentKit.getActions();
-  return actions.map(action =>
-    tool(
-      async (arg: z.output<typeof action.schema>) => {
-        const result = await action.invoke(arg);
-        return result;
-      },
-      {
-        name: action.name,
-        description: action.description,
-        schema: action.schema,
-      },
-    ),
-  );
-}
+// Mocking the Action class
+const mockAction: Action = {
+  name: "testAction",
+  description: "A test action",
+  schema: z.object({ test: z.string() }),
+  invoke: jest.fn(async arg => `Invoked with ${arg.test}`),
+};
+
+// Creating a mock for PersonalAgentKit
+jest.mock("@verida/personalagentkit", () => {
+  const originalModule = jest.requireActual("@verida/personalagentkit");
+  return {
+    ...originalModule,
+    PersonalAgentKit: {
+      from: jest.fn().mockImplementation(() => ({
+        getActions: jest.fn(() => [mockAction]),
+      })),
+    },
+  };
+});
+
+describe("getLangChainTools", () => {
+  it("should return an array of tools with correct properties", async () => {
+    const mockAgentKit = await PersonalAgentKit.from({
+      veridaApiKey: ""
+    });
+    const tools = await getLangChainTools(mockAgentKit);
+
+    expect(tools).toHaveLength(1);
+    const tool = tools[0];
+
+    expect(tool.name).toBe(mockAction.name);
+    expect(tool.description).toBe(mockAction.description);
+    expect(tool.schema).toBe(mockAction.schema);
+
+    const result = await tool.invoke({ test: "data" });
+    expect(result).toBe("Invoked with data");
+  });
+});

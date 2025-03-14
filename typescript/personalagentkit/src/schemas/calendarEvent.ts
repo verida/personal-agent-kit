@@ -1,59 +1,72 @@
 import { BaseDataSchema } from "./base";
-import CONFIG from "../../config"
 import { CouchDBQuerySchemaType } from "../interfaces";
+import { SCHEMAS } from "../schemas";
 
+/**
+ *
+ */
 class CalendarEventDataSchema implements BaseDataSchema {
+  /**
+   *
+   */
+  public getUrl(): string {
+    return SCHEMAS.EVENT;
+  }
 
-    public getUrl(): string {
-        return CONFIG.verida.schemas.EVENT
-    }
+  /**
+   *
+   */
+  public getTimestampField(): string {
+    return "start.dateTime";
+  }
 
-    public getTimestamp(row: any): string {
-        return row.start.dateTime
-    }
+  /**
+   *
+   */
+  public getName(): string {
+    return "CalendarEvent";
+  }
 
-    public getTimestampField(): string {
-        return "start.dateTime"
-    }
+  /**
+   *
+   */
+  public getLabel(): string {
+    return "Calendar Event";
+  }
 
-    public getGroupId(row: any): string | undefined {
-        return row.calendarId
-    }
+  /**
+   *
+   */
+  public getDescription(): string {
+    return "my calendar events";
+  }
 
-    public getRagContent(row: any): string {
-        return `[ Calendar Event ]\nID: ${row._id}\nEvent Name: ${row.name}\nDescription: ${row.description}\nStatus: ${row.status}\nCreator: ${JSON.stringify(row.creator)}\nAttendees: ${JSON.stringify(row.attendees)}\nLocation: ${row.location}\nStart: ${row.start.dateTime}\nSource: ${row.sourceApplication}})\n\n`
-    }
+  /**
+   *
+   */
+  public getDefaultQueryParams(): Partial<CouchDBQuerySchemaType> {
+    return {
+      fields: [
+        "_id",
+        "name",
+        "status",
+        "description",
+        "calendarId",
+        "location",
+        "creator",
+        "start",
+        "end",
+        "sourceApplication",
+      ],
+      sort: [{ "start.dateTime": "desc" }],
+    };
+  }
 
-    public getName(): string {
-        return "CalendarEvent"
-    }
-    
-    public getLabel(): string {
-        return "Calendar Event"
-    }
-    
-    public getDescription(): string {
-        return "my calendar events"
-    }
-    
-    public getStoreFields(): string[] {
-        return ['_id', 'insertedAt', "start.dateTime", "schema"]
-    }
-    
-    public getIndexFields(): string[] {
-        // @todo: Support indexing attachments, creator, organizer and attendees
-        return ['name', 'description', 'location', 'status', "modifiedAt", "insertedAt", "start.dateTime"]
-    }
-    
-    public getDefaultQueryParams(): Partial<CouchDBQuerySchemaType> {
-        return {
-            fields: ['_id', 'name', 'status', 'description', 'calendarId', 'location', 'creator', 'start', 'end', 'sourceApplication'],
-            sort: [{ "start.dateTime": "desc" }]
-        }
-    }
-    
-    public getQuerySchemaString(): string {
-        return `
+  /**
+   *
+   */
+  public getQuerySchemaString(): string {
+    return `
 {
     "_id": {
         "title": "ID",
@@ -201,8 +214,7 @@ class CalendarEventDataSchema implements BaseDataSchema {
     }
 }
 `;
-    }
-
+  }
 }
 
-export default new CalendarEventDataSchema()
+export default new CalendarEventDataSchema();

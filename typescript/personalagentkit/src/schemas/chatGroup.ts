@@ -1,58 +1,61 @@
 import { BaseDataSchema } from "./base";
-import CONFIG from "../../config"
+import { SCHEMAS } from "../schemas";
 import { CouchDBQuerySchemaType } from "../interfaces";
 
+/**
+ *
+ */
 class ChatGroupDataSchema implements BaseDataSchema {
+  /**
+   *
+   */
+  public getUrl(): string {
+    return SCHEMAS.CHAT_GROUP;
+  }
 
-    public getUrl(): string {
-        return CONFIG.verida.schemas.CHAT_GROUP
-    }
+  /**
+   *
+   */
+  public getTimestampField(): string {
+    return "insertedAt";
+  }
 
-    public getTimestamp(row: any): string {
-        return row.insertedAt
-    }
+  /**
+   *
+   */
+  public getName(): string {
+    return "ChatGroup";
+  }
 
-    public getTimestampField(): string {
-        return "insertedAt"
-    }
+  /**
+   *
+   */
+  public getLabel(): string {
+    return "Chat Group";
+  }
 
-    public getGroupId(row: any): string | undefined {
-        return undefined
-    }
+  /**
+   *
+   */
+  public getDescription(): string {
+    return "my chat groups";
+  }
 
-    public getRagContent(row: any): string {
-        return `[ Chat Group ]\nID: ${row._id}\nGroup Name: ${row.name}\nDescription: ${row.description}\nURL: ${row.uri}\nSource: ${row.sourceApplication}\n\n`
-    }
+  /**
+   *
+   */
+  public getDefaultQueryParams(): Partial<CouchDBQuerySchemaType> {
+    return {
+      fields: ["_id", "name", "description", "uri", "insertedAt", "sourceApplication"],
+      sort: [{ insertedAt: "desc" }],
+    };
+  }
 
-    public getName(): string {
-        return "ChatGroup"
-    }
-    
-    public getLabel(): string {
-        return "Chat Group"
-    }
-    
-    public getDescription(): string {
-        return "my chat groups"
-    }
-    
-    public getStoreFields(): string[] {
-        return ['_id', 'name', 'description', 'insertedAt']
-    }
-    
-    public getIndexFields(): string[] {
-        return ['name','description','insertedAt']
-    }
-    
-    public getDefaultQueryParams(): Partial<CouchDBQuerySchemaType> {
-        return {
-            fields: ['_id', 'name', 'description', 'uri', 'insertedAt', 'sourceApplication'],
-            sort: [{ "insertedAt": "desc" }]
-        }
-    }
-    
-    public getQuerySchemaString(): string {
-        return `
+  /**
+   *
+   */
+  public getQuerySchemaString(): string {
+    return `
 {
                 "_id": {
                     "title": "ID",
@@ -86,8 +89,7 @@ class ChatGroupDataSchema implements BaseDataSchema {
     }
             }
 `;
-    }
-
+  }
 }
 
-export default new ChatGroupDataSchema()
+export default new ChatGroupDataSchema();

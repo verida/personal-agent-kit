@@ -1,75 +1,71 @@
 import { BaseDataSchema } from "./base";
-import CONFIG from "../../config"
+import { SCHEMAS } from "../schemas";
 import { CouchDBQuerySchemaType } from "../interfaces";
-import { getDataSchemas, getDataSchemasDict } from ".";
 
+/**
+ *
+ */
 class ChatMessageDataSchema implements BaseDataSchema {
+  /**
+   *
+   */
+  public getUrl(): string {
+    return SCHEMAS.CHAT_MESSAGE;
+  }
 
-    public getUrl(): string {
-        return CONFIG.verida.schemas.CHAT_MESSAGE
-    }
+  /**
+   *
+   */
+  public getName(): string {
+    return "ChatMessage";
+  }
 
-    public getRagContent(row: any): string {
-        if (row.group) {
-            const dataSchemasDict = getDataSchemasDict()
-            const chatGroupSchema = dataSchemasDict[CONFIG.verida.schemas.CHAT_GROUP]
+  /**
+   *
+   */
+  public getTimestampField(): string {
+    return "sentAt";
+  }
 
-            let text = chatGroupSchema.getRagContent(row.group)
-            for (const message of row.messages) {
-                text += `${this.ragMessage(message)}`
-            }
+  /**
+   *
+   */
+  public getLabel(): string {
+    return "Chat Message";
+  }
 
-            return text
-        }
+  /**
+   *
+   */
+  public getDescription(): string {
+    return "my chat messages";
+  }
 
-        return this.ragMessage(row)
-    }
+  /**
+   *
+   */
+  public getDefaultQueryParams(): Partial<CouchDBQuerySchemaType> {
+    return {
+      fields: [
+        "_id",
+        "messageText",
+        "type",
+        "fromHandle",
+        "fromName",
+        "groupName",
+        "groupId",
+        "sentAt",
+        "sourceApplication",
+      ],
+      sort: [{ sentAt: "desc" }],
+    };
+  }
 
-    private ragMessage(row: any) {
-        return `[ Chat Message ]\nMessage Text: ${row.messageText}\nType (send/receive): ${row.type}\nFrom: ${row.fromName} (${row.fromHandle})\nGroup: ${row.groupName || "" }(${row.groupId})\nSource: ${row.sourceApplication}\nSent At: ${row.sentAt}\n\n`
-    }
-
-    public getName(): string {
-        return "ChatMessage"
-    }
-
-    public getGroupId(row: any): string {
-        return row.groupId
-    }
-
-    public getTimestamp(row: any): string {
-        return row.sentAt
-    }
-
-    public getTimestampField(): string {
-        return "sentAt"
-    }
-    
-    public getLabel(): string {
-        return "Chat Message"
-    }
-    
-    public getDescription(): string {
-        return "my chat messages"
-    }
-    
-    public getStoreFields(): string[] {
-        return ['_id', 'groupId', 'sentAt']
-    }
-    
-    public getIndexFields(): string[] {
-        return ['messageText', 'fromHandle', 'fromName', 'groupName', 'groupId', 'indexableText', 'sentAt','sourceApplication']
-    }
-    
-    public getDefaultQueryParams(): Partial<CouchDBQuerySchemaType> {
-        return {
-            fields: ['_id', 'messageText', 'type', 'fromHandle', 'fromName', 'groupName', 'groupId', 'sentAt', 'sourceApplication'],
-            sort: [{ "sentAt": "desc" }]
-        }
-    }
-    
-    public getQuerySchemaString(): string {
-        return `
+  /**
+   *
+   */
+  public getQuerySchemaString(): string {
+    return `
 {
     "groupId": {
         "title": "Chat Group ID",
@@ -117,8 +113,7 @@ class ChatMessageDataSchema implements BaseDataSchema {
     }
 }
 `;
-    }
-
+  }
 }
 
-export default new ChatMessageDataSchema()
+export default new ChatMessageDataSchema();
