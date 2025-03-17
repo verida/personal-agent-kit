@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { KeywordSearchSchema } from "../interfaces";
+import { DatastoreSearchSchema } from "../interfaces";
 import axios from "axios";
 import { BaseAction } from "./base";
 
@@ -12,7 +12,7 @@ export class DatastoreSearchAction extends BaseAction {
   public name = "search_user_data";
   public description =
     "This tool enables searching of specific types of user data by keywords. Input to this tool specifies keywords to search and the data type to search.";
-  public schema = KeywordSearchSchema;
+  public schema = DatastoreSearchSchema;
 
   /**
    * Invoke this action
@@ -20,7 +20,7 @@ export class DatastoreSearchAction extends BaseAction {
    * @param args - Action arguments
    * @returns Action result
    */
-  public async _invoke(args: z.infer<typeof KeywordSearchSchema>): Promise<string> {
+  public async _invoke(args: z.infer<typeof DatastoreSearchSchema>): Promise<string> {
     const datastoreRef = btoa(SCHEMAS[args.dataType]);
 
     const response = await axios({

@@ -44,9 +44,17 @@ export type ProfileSchemaType = z.infer<typeof ProfileSchema>;
 
 export const KeywordSearchSchema = z.object({
   keywords: z.string().describe(`Keywords to search`),
-  dataType: z.enum(SCHEMA_NAMES).describe(`Type of data to search`),
   limit: z.number().optional().describe(`Maximum number of documents to return`),
   skip: z.number().optional().describe(`Number of documents to skip`),
 });
 
 export type KeywordSearchSchemaType = z.infer<typeof KeywordSearchSchema>;
+
+export const DatastoreSearchSchema = z.object({
+  keywords: z.string().describe(`Keywords to search`),
+  dataType: z.enum(SCHEMA_NAMES).describe(`Type of data to search`),
+  limit: z.number().optional().describe(`Maximum number of documents to return`),
+  skip: z.number().optional().describe(`Number of documents to skip`),
+});
+
+export type DatastoreSearchSchemaType = z.infer<typeof DatastoreSearchSchema>;
