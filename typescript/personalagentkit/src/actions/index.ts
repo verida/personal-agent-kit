@@ -3,6 +3,7 @@ import { getDataSchemas } from "../schemas/index";
 import { VeridaUserInfoAction } from "./user-info";
 import { QueryAction } from "./query";
 import { ProfilesAction } from "./profiles";
+import { DatastoreSearchAction } from "./search-datastore";
 
 /**
  *
@@ -28,6 +29,7 @@ export function getActions(authToken: string, apiEndpoint: string): Action[] {
 
   actions.push(new VeridaUserInfoAction(authToken, apiEndpoint));
   actions.push(new ProfilesAction(authToken, apiEndpoint));
+  actions.push(new DatastoreSearchAction(authToken, apiEndpoint));
 
   return actions;
 }

@@ -1,4 +1,7 @@
 import { z } from "zod";
+import { SCHEMAS } from "./schemas";
+
+const SCHEMA_NAMES = Object.keys(SCHEMAS) as [string, ...string[]];
 
 export interface PersonalAgentKitOptions {
   veridaApiKey: string;
@@ -38,3 +41,12 @@ export const ProfileSchema = z.object({
 });
 
 export type ProfileSchemaType = z.infer<typeof ProfileSchema>;
+
+export const KeywordSearchSchema = z.object({
+  keywords: z.string().describe(`Keywords to search`),
+  dataType: z.enum(SCHEMA_NAMES).describe(`Type of data to search`),
+  limit: z.number().optional().describe(`Maximum number of documents to return`),
+  skip: z.number().optional().describe(`Number of documents to skip`),
+});
+
+export type KeywordSearchSchemaType = z.infer<typeof KeywordSearchSchema>;
