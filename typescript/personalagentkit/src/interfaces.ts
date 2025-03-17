@@ -32,3 +32,9 @@ export type CouchDBQuerySchemaType = z.infer<typeof CouchDBQuerySchema>;
 
 export const EmptySchema = z.object({});
 export type EmptySchemaType = z.infer<typeof EmptySchema>;
+
+export const ProfileSchema = z.object({
+  providerId: z.string().optional().describe(`Connection name, ie: google, telegram, discord`),
+});
+
+export type ProfileSchemaType = z.infer<typeof ProfileSchema>;

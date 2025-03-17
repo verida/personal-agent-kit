@@ -1,6 +1,3 @@
-import { z } from "zod";
-import { Action, CouchDBQuerySchema } from "@verida/personalagentkit";
-import { BaseQueryToolConfig } from "./interfaces";
 import axios from "axios";
 import { BaseAction } from "./base";
 
@@ -13,18 +10,8 @@ export class VeridaUserInfoAction extends BaseAction {
     "This tool provides a summary of all the permissions granted to access the user's data stored in Verida and their account ID (DID).";
 
   /**
-   *
-   * @param authToken
-   * @param apiEndpoint
-   */
-  constructor(authToken: string, apiEndpoint: string) {
-    super(authToken, apiEndpoint);
-  }
-
-  /**
    * Invoke this action
    *
-   * @param args - Action arguments
    * @returns Action result
    */
   public async _invoke(): Promise<string> {
