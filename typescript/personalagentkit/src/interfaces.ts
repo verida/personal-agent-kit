@@ -29,3 +29,6 @@ export const CouchDBQuerySchema = z.object({
 });
 
 export type CouchDBQuerySchemaType = z.infer<typeof CouchDBQuerySchema>;
+
+export const EmptySchema = z.object({});
+export type EmptySchemaType = z.infer<typeof EmptySchema>;

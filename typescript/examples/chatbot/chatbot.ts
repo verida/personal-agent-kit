@@ -110,7 +110,7 @@ async function runAutonomousMode(agent: any, config: any, interval = 10) {
       for await (const chunk of stream) {
         if ("agent" in chunk) {
           console.log(chunk.agent.messages[0].content);
-        } else if ("tools" in chunk) {
+        } else if ("tools" in chunk && process.env.VERIDA_DEBUG === "true") {
           console.log(chunk.tools.messages[0].content);
         }
         console.log("-------------------");

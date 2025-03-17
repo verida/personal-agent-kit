@@ -1,15 +1,14 @@
 import { z } from "zod";
-import { Action, CouchDBQuerySchema } from "@verida/personalagentkit";
+import { CouchDBQuerySchema } from "@verida/personalagentkit";
 import { BaseQueryToolConfig } from "./interfaces";
 import axios from "axios";
+import { BaseAction } from "./base";
 
 /**
  *
  */
-export class QueryAction implements Action {
+export class QueryAction extends BaseAction {
   private config: BaseQueryToolConfig;
-  private authToken: string;
-  private apiEndpoint: string;
 
   public name = "query_user_data";
   public description = "";
@@ -21,8 +20,7 @@ export class QueryAction implements Action {
    * @param config
    */
   constructor(authToken: string, apiEndpoint: string, config: BaseQueryToolConfig) {
-    this.authToken = authToken;
-    this.apiEndpoint = apiEndpoint;
+    super(authToken, apiEndpoint);
     this.config = config;
     this.description = `Input to this tool is a detailed and correct CouchDB query of ${this.getConfig().extraDetail} with the following schema ${this.getConfig().schemaDefinition}.
         Only use valid CouchDB operators in the selector.  Regular expressions must use javascript syntax. Don't use case insensitive groups (?i).
@@ -42,8 +40,8 @@ export class QueryAction implements Action {
    * @param args - Action arguments
    * @returns Action result
    */
-  public async invoke(args: z.infer<typeof CouchDBQuerySchema>): Promise<string> {
-    const config = this.getConfig()
+  public async _invoke(args: z.infer<typeof CouchDBQuerySchema>): Promise<string> {
+    const config = this.getConfig();
 
     const selector = args.selector || config.defaultParams.selector;
     const fields = args.fields || config.defaultParams.fields;

@@ -1,5 +1,6 @@
 import { Action } from "../interfaces";
 import { getDataSchemas } from "../schemas/index";
+import { VeridaUserInfoAction } from "./user-info";
 import { QueryAction } from "./query";
 
 /**
@@ -19,8 +20,12 @@ export function getActions(authToken: string, apiEndpoint: string): Action[] {
       extraDetail: schema.getDescription(),
     });
 
+    queryAction.name = schema.getName();
+
     actions.push(queryAction);
   }
+
+  actions.push(new VeridaUserInfoAction(authToken, apiEndpoint));
 
   return actions;
 }
