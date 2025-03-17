@@ -5,6 +5,7 @@ import { QueryAction } from "./query";
 import { ProfilesAction } from "./profiles";
 import { DatastoreSearchAction } from "./search-datastore";
 import { UniversalSearchAction } from "./search-universal";
+import { ChatSearchAction } from "./search-chat";
 
 /**
  *
@@ -32,6 +33,7 @@ export function getActions(authToken: string, apiEndpoint: string): Action[] {
   actions.push(new ProfilesAction(authToken, apiEndpoint));
   actions.push(new DatastoreSearchAction(authToken, apiEndpoint));
   actions.push(new UniversalSearchAction(authToken, apiEndpoint));
+  actions.push(new ChatSearchAction(authToken, apiEndpoint));
 
   return actions;
 }
