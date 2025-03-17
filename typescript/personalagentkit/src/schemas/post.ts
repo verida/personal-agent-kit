@@ -57,48 +57,14 @@ class PostDataSchema implements BaseDataSchema {
   public getQuerySchemaString(): string {
     return `
 {
-    "_id": {
-        "title": "ID",
-        "description": "Unique ID of this record",
-        "type": "string",
-    },
-    "name": {
-        "title": "Name",
-        "description": "Name of post",
-        "type": "string",
-    },
-    {
-    "type": {
-        "title": "Type",
-        "description": "Type of post",
-        "type": "string",
-        "enum": ["link", "status", "photo", "video", "music", "event", "offer", "question", "note", "album", "life_event"]
-    },
-    "content": {
-        "title": "Content",
-        "description": "Content of the post",
-        "type": "string"
-    },
-    "contentHtml": {
-        "title": "Content (html)",
-        "description": "HTML formatted version of the post",
-        "type": "string"
-    },
-    "uri": {
-        "title": "URI",
-        "type": "string"
-    },
-    "insertedAt": {
-        "title": "Inserted",
-        "description": "Date/time this record was inserted",
-        "type": "string",
-        "format": "date-time"
-    },
-  "sourceApplication": {
-            "title": "Source application",
-            "description": "Name of the application this data was sourced from",
-            "type": "string"
-    }
+  "_id": {},
+  "name": {"title": "Post name"},
+  "type": {"title": "Type of post","enum": ["link", "status", "photo", "video", "music", "event", "offer", "question", "note", "album", "life_event"]},
+  "content": {"title": "Post content"},
+  "contentHtml": {"title": "Post content (html)",},
+  "uri": {"title": "Post link",},
+  "insertedAt": {"format": "date-time"},
+  "sourceApplication": {"title": "Application this data is sourced"}
 }
 `;
   }

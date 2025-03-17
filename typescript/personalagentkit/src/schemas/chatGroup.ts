@@ -57,38 +57,13 @@ class ChatGroupDataSchema implements BaseDataSchema {
   public getQuerySchemaString(): string {
     return `
 {
-                "_id": {
-                    "title": "ID",
-                    "description": "Unique ID of this record",
-                    "type": "string",
-                },
-                "name": {
-                    "title": "Name",
-                    "description": "Name of the chat group",
-                    "type": "string",
-                },
-                "description": {
-                    "title": "Description",
-                    "description": "Description of the chat group",
-                    "type": "string",
-                },
-                "uri": {
-                    "title": "URI",
-                    "type": "string"
-                },
-                "insertedAt": {
-                    "title": "Inserted",
-                    "description": "Date/time this record was inserted",
-                    "type": "string",
-                    "format": "date-time"
-                },
-  "sourceApplication": {
-            "title": "Source application",
-            "description": "Name of the application this data was sourced from",
-            "type": "string"
-    }
-            }
-`;
+  "_id": {},
+  "name": {"description": "Chat group name"},
+  "description": {},
+  "uri": {"title": "Group link"},
+  "insertedAt": {"format": "date-time"},
+  "sourceApplication": {"title": "Application this data is sourced"},
+}`;
   }
 }
 

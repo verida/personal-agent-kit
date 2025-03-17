@@ -59,30 +59,11 @@ class FollowingDataSchema implements BaseDataSchema {
   public getQuerySchemaString(): string {
     return `
 {
-    "_id": {
-        "title": "ID",
-        "description": "Unique ID of this record",
-        "type": "string",
-    },
-    "name": {
-        "title": "Name",
-        "description": "Name of who is followed",
-        "type": "string",
-    },
-    "uri": {
-        "title": "URI",
-        "type": "string"
-    },
-    "followedTimestamp": {
-        "title": "Followed timestamp",
-        "type": "string",
-        "format": "date-time"
-    },
-  "sourceApplication": {
-            "title": "Source application",
-            "description": "Name of the application this data was sourced from",
-            "type": "string"
-    }
+  "_id": {},
+  "name": {"title": "Name of who is followed"},
+  "uri": {"title": "External link"},
+  "followedTimestamp": {"format": "date-time"},
+  "sourceApplication": {"title": "Application this data is sourced"}
 }
 `;
   }

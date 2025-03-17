@@ -77,52 +77,15 @@ class FileDataSchema implements BaseDataSchema {
   public getQuerySchemaString(): string {
     return `
 {
-    "_id": {
-        "title": "ID",
-        "description": "Unique ID of this record",
-        "type": "string",
-    },
-    "name": {
-        "name": "File name",
-        "type": "string",
-        "description": "File name"
-    },
-    "extension": {
-        "title": "Extension",
-        "type": "string",
-        "description": "File extension of the document (ie: png)"
-    },
-    "mimeType": {
-        "title": "MIME Type",
-        "type": "string",
-        "description": "MIME type of the file"
-    },
-    "size": {
-        "title": "Size",
-        "type": "integer",
-        "description": "Size of the document in bytes"
-    },
-    "contentText": {
-        "title": "Content (Text)",
-        "type": "string",
-        "description": "Text content of the file (if relevant)"
-    },
-    "uri": {
-        "title": "URI",
-        "type": "string",
-        "description": "External link to the document (optional)"
-    },
-    "insertedAt": {
-        "title": "Inserted",
-        "description": "Date/time this record was inserted",
-        "type": "string",
-        "format": "date-time"
-    },
-  "sourceApplication": {
-            "title": "Source application",
-            "description": "Name of the application this data was sourced from",
-            "type": "string"
-    }
+  "_id": {},
+  "name": {"name": "File name"},
+  "extension": {"title": "File Extension"},
+  "mimeType": {},
+  "size": {"title": "Size (bytes)"},
+  "contentText": {},
+  "uri": {"description": "External link to the file (optional)"},
+  "insertedAt": {"format": "date-time"},
+  "sourceApplication": {"title": "Application this data is sourced"}
 }
 `;
   }
