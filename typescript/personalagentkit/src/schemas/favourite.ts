@@ -44,6 +44,20 @@ class FavouriteDataSchema implements BaseDataSchema {
   /**
    *
    */
+  public getStoreFields(): string[] {
+    return ["_id", "insertedAt"];
+  }
+
+  /**
+   *
+   */
+  public getIndexFields(): string[] {
+    return ["name", "favouriteType", "uri", "contentType", "description", "sourceApplication"];
+  }
+
+  /**
+   *
+   */
   public getDefaultQueryParams(): Partial<CouchDBQuerySchemaType> {
     return {
       fields: [

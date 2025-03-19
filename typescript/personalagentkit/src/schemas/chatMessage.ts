@@ -44,6 +44,29 @@ class ChatMessageDataSchema implements BaseDataSchema {
   /**
    *
    */
+  public getStoreFields(): string[] {
+    return ["_id", "groupId", "sentAt"];
+  }
+
+  /**
+   *
+   */
+  public getIndexFields(): string[] {
+    return [
+      "messageText",
+      "fromHandle",
+      "fromName",
+      "groupName",
+      "groupId",
+      "indexableText",
+      "sentAt",
+      "sourceApplication",
+    ];
+  }
+
+  /**
+   *
+   */
   public getDefaultQueryParams(): Partial<CouchDBQuerySchemaType> {
     return {
       fields: [

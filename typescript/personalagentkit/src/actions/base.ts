@@ -1,4 +1,5 @@
 import { Action, EmptySchema, EmptySchemaType } from "@verida/personalagentkit";
+import { AxiosError } from "axios";
 import z from "zod";
 
 /**
@@ -36,15 +37,18 @@ export class BaseAction<TActionSchema extends z.ZodSchema = z.ZodSchema> impleme
     try {
       const result = await this._invoke(args);
 
-    //   if (DEBUG) {
-    //     console.log(`Verida:DEBUG:invoke-result:${this.name}\n${result}\n`);
-    //   }
-
       return result;
     } catch (err: unknown) {
       const error = err as Error;
       if (DEBUG) {
         console.log(`Verida:DEBUG:invoke-error:${error.message}\n`);
+
+        const axiosError = error as AxiosError
+        if (axiosError.response && axiosError.response.status != 200) {
+          console.log(
+            `Verida:DEBUG:HTTP-error:${axiosError.response.statusText} (${axiosError.response.status})\nRequest:${axiosError.request.res.responseUrl}\nResponse data:${JSON.stringify(axiosError.response.data, null, 2)}`,
+          );
+        }
       }
 
       throw err;

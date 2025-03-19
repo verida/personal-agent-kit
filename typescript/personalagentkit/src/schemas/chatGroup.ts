@@ -44,6 +44,20 @@ class ChatGroupDataSchema implements BaseDataSchema {
   /**
    *
    */
+  public getStoreFields(): string[] {
+    return ["_id", "name", "description", "insertedAt"];
+  }
+
+  /**
+   *
+   */
+  public getIndexFields(): string[] {
+    return ["name", "description", "insertedAt"];
+  }
+
+  /**
+   *
+   */
   public getDefaultQueryParams(): Partial<CouchDBQuerySchemaType> {
     return {
       fields: ["_id", "name", "description", "uri", "insertedAt", "sourceApplication"],

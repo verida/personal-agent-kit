@@ -64,6 +64,31 @@ class EmailDataSchema implements BaseDataSchema {
   /**
    *
    */
+  public getStoreFields(): string[] {
+    return ["_id", "sentAt"];
+  }
+
+  /**
+   *
+   */
+  public getIndexFields(): string[] {
+    return [
+      "name",
+      "fromName",
+      "fromEmail",
+      "messageText",
+      "attachments_0.textContent",
+      "attachments_1.textContent",
+      "attachments_2.textContent",
+      "indexableText",
+      "sentAt",
+      "sourceApplication",
+    ];
+  }
+
+  /**
+   *
+   */
   public getQuerySchemaString(): string {
     return `
 {

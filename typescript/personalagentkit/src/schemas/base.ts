@@ -8,4 +8,6 @@ export interface BaseDataSchema {
   getDefaultQueryParams(): Partial<CouchDBQuerySchemaType>;
   getQuerySchemaString(): string;
   getTimestampField(): string;
+  getStoreFields(): string[];
+  getIndexFields(): string[];
 }

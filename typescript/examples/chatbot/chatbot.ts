@@ -19,7 +19,7 @@ function validateEnvironment(): void {
   const missingVars: string[] = [];
 
   // Check required variables
-  const requiredVars = ["OPENAI_API_KEY", "VERIDA_API_KEY"];
+  const requiredVars = ["OPENAI_API_KEY", "VERIDA_API_KEY", "OPENAI_MODEL"];
   requiredVars.forEach(varName => {
     if (!process.env[varName]) {
       missingVars.push(varName);
@@ -48,7 +48,11 @@ async function initializeAgent() {
   try {
     // Initialize LLM
     const llm = new ChatOpenAI({
-      model: "gpt-4o-mini",
+      model: process.env.OPENAI_MODEL,
+      apiKey: process.env.OPENAI_API_KEY,
+      configuration: {
+        baseURL: process.env.OPENAI_BASE_URL ? process.env.OPENAI_BASE_URL : undefined,
+      },
     });
 
     // Initialize AgentKit

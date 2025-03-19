@@ -4,6 +4,7 @@ import axios from "axios";
 import { BaseAction } from "./base";
 
 import { SCHEMAS } from "../schemas";
+import { getDataSchemasDict } from "../schemas/index";
 
 /**
  *
@@ -21,7 +22,10 @@ export class DatastoreSearchAction extends BaseAction {
    * @returns Action result
    */
   public async _invoke(args: z.infer<typeof DatastoreSearchSchema>): Promise<string> {
-    const datastoreRef = btoa(SCHEMAS[args.dataType]);
+    const schemaUrl = SCHEMAS[args.dataType];
+    const datastoreRef = btoa(schemaUrl);
+    const schemasList = getDataSchemasDict();
+    const schema = schemasList[schemaUrl];
 
     const response = await axios({
       method: "POST",
@@ -29,7 +33,9 @@ export class DatastoreSearchAction extends BaseAction {
       data: {
         keywords: args.keywords,
         limit: args.limit ? args.limit : 20,
-        skip: args.skip ? args.skip : undefined
+        skip: args.skip ? args.skip : undefined,
+        indexFields: schema.getIndexFields(),
+        storeFields: schema.getStoreFields(),
       },
       headers: {
         "Content-Type": "application/json",

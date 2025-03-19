@@ -54,6 +54,27 @@ class FileDataSchema implements BaseDataSchema {
   /**
    *
    */
+  public getStoreFields(): string[] {
+    return ["_id", "insertedAt"];
+  }
+
+  /**
+   *
+   */
+  public getIndexFields(): string[] {
+    return [
+      "name",
+      "contentText",
+      "indexableText",
+      "sourceApplication",
+      "modifiedAt",
+      "insertedAt",
+    ];
+  }
+
+  /**
+   *
+   */
   public getDefaultQueryParams(): Partial<CouchDBQuerySchemaType> {
     return {
       fields: [

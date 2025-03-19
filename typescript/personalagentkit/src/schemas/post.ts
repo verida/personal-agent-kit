@@ -44,6 +44,20 @@ class PostDataSchema implements BaseDataSchema {
   /**
    *
    */
+  public getStoreFields(): string[] {
+    return ["_id", "name", "content", "type", "uri", "insertedAt"];
+  }
+
+  /**
+   *
+   */
+  public getIndexFields(): string[] {
+    return ["name", "content", "indexableText", "sourceApplication"];
+  }
+
+  /**
+   *
+   */
   public getDefaultQueryParams(): Partial<CouchDBQuerySchemaType> {
     return {
       fields: ["_id", "name", "type", "content", "uri", "sourceApplication"],

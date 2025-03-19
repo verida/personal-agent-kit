@@ -46,6 +46,20 @@ class FollowingDataSchema implements BaseDataSchema {
   /**
    *
    */
+  public getStoreFields(): string[] {
+    return ["_id", "name", "uri", "description", "insertedAt", "followedTimestamp"];
+  }
+
+  /**
+   *
+   */
+  public getIndexFields(): string[] {
+    return ["name", "description", "sourceApplication"];
+  }
+
+  /**
+   *
+   */
   public getDefaultQueryParams(): Partial<CouchDBQuerySchemaType> {
     return {
       fields: ["_id", "name", "uri", "followedTimestamp", "sourceApplication"],

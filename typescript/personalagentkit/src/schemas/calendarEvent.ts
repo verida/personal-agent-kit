@@ -44,6 +44,29 @@ class CalendarEventDataSchema implements BaseDataSchema {
   /**
    *
    */
+  public getStoreFields(): string[] {
+    return ["_id", "insertedAt", "start.dateTime", "schema"];
+  }
+
+  /**
+   *
+   */
+  public getIndexFields(): string[] {
+    // @todo: Support indexing attachments, creator, organizer and attendees
+    return [
+      "name",
+      "description",
+      "location",
+      "status",
+      "modifiedAt",
+      "insertedAt",
+      "start.dateTime",
+    ];
+  }
+
+  /**
+   *
+   */
   public getDefaultQueryParams(): Partial<CouchDBQuerySchemaType> {
     return {
       fields: [
