@@ -19,7 +19,7 @@ export class ProfilesAction extends BaseAction {
   public async _invoke(args: ProfileSchemaType): Promise<string> {
     const response = await axios({
       method: "GET",
-      url: `https://${this.apiEndpoint}/api/rest/v1/connections/profiles${args.providerId ? `?providerId=${args.providerId}` : ``}`,
+      url: `${this.apiEndpoint}/api/rest/v1/connections/profiles${args.providerId ? `?providerId=${args.providerId}` : ``}`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${this.authToken}`,

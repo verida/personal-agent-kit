@@ -20,7 +20,7 @@ export class ChatSearchAction extends BaseAction {
   public async _invoke(args: z.infer<typeof KeywordSearchSchema>): Promise<string> {
     const response = await axios({
       method: "GET",
-      url: `https://${this.apiEndpoint}/api/rest/v1/search/chatThreads?keywords=${args.keywords}&limit=${args.limit ? args.limit : 20}&skip=${args.skip ? args.skip : 0}`,
+      url: `${this.apiEndpoint}/api/rest/v1/search/chatThreads?keywords=${args.keywords}&limit=${args.limit ? args.limit : 20}&skip=${args.skip ? args.skip : 0}`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${this.authToken}`,
