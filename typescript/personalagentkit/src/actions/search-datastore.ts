@@ -29,7 +29,7 @@ export class DatastoreSearchAction extends BaseAction {
 
     const response = await axios({
       method: "POST",
-      url: `https://api.verida.ai/api/rest/v1/search/datastore/${datastoreRef}`,
+      url: `https://${this.apiEndpoint}/api/rest/v1/search/datastore/${datastoreRef}`,
       data: {
         keywords: args.keywords,
         limit: args.limit ? args.limit : 20,

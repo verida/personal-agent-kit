@@ -79,7 +79,7 @@ export class QueryAction extends BaseAction {
 
       response = await axios({
         method: "POST",
-        url: `https://api.verida.ai/api/rest/v1/ds/query/${btoa(this.config.schemaUrl)}`,
+        url: `https://${this.apiEndpoint}/api/rest/v1/ds/query/${btoa(this.config.schemaUrl)}`,
         data: params,
         headers: {
           "Content-Type": "application/json",

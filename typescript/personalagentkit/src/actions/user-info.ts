@@ -17,7 +17,7 @@ export class VeridaUserInfoAction extends BaseAction {
   public async _invoke(): Promise<string> {
     const response = await axios({
       method: "GET",
-      url: `https://api.verida.ai/api/rest/v1/auth/token?tokenId=${this.authToken}`,
+      url: `https://${this.apiEndpoint}/api/rest/v1/auth/token?tokenId=${this.authToken}`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${this.authToken}`,
