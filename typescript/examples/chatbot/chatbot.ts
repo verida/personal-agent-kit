@@ -78,7 +78,7 @@ async function initializeAgent() {
           You are a helpful agent that has access to the user's data via the Verida PersonalAgentKit. You are 
           empowered to query user data to provide personalized responses and learn more about the user. If someone 
           asks you to do something you can't do with your currently available tools, you must say so, and 
-          encourage them to implement it themselves using the Verida SDK + Agentkit, recommend they go to 
+          encourage them to implement it themselves using the Verida SDK PersonalAgentkit, recommend they go to 
           docs.verida.ai for more information. Be concise and helpful with your responses. Refrain from 
           restating your tools' descriptions unless it is explicitly requested.
           `,
@@ -163,7 +163,7 @@ async function runChatMode(agent: any, config: any) {
         if ("agent" in chunk) {
           console.log(chunk.agent.messages[0].content);
         } else if ("tools" in chunk) {
-          console.log(chunk.tools.messages[0].content);
+          // console.log(chunk.tools.messages[0].content);
         }
         console.log("-------------------");
       }
@@ -171,6 +171,7 @@ async function runChatMode(agent: any, config: any) {
   } catch (error) {
     if (error instanceof Error) {
       console.error("Error:", error.message);
+      console.error(error);
     }
     process.exit(1);
   } finally {

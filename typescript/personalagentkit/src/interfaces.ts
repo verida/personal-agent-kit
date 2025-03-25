@@ -58,3 +58,10 @@ export const DatastoreSearchSchema = z.object({
 });
 
 export type DatastoreSearchSchemaType = z.infer<typeof DatastoreSearchSchema>;
+
+export const DatastoreGetRecordSchema = z.object({
+  dataType: z.enum(SCHEMA_NAMES).describe(`Type of data to search`),
+  recordId: z.string().describe(`Unique ID of the record to fetch`)
+});
+
+export type DatastoreGetRecordSchemaType = z.infer<typeof DatastoreGetRecordSchema>;

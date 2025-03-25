@@ -6,6 +6,7 @@ import { ProfilesAction } from "./profiles";
 import { DatastoreSearchAction } from "./search-datastore";
 import { UniversalSearchAction } from "./search-universal";
 import { ChatSearchAction } from "./search-chat";
+import { DatastoreGetRecordAction } from "./get-record";
 
 /**
  *
@@ -24,7 +25,7 @@ export function getActions(authToken: string, apiEndpoint: string): Action[] {
       extraDetail: schema.getDescription(),
     });
 
-    queryAction.name = schema.getName();
+    queryAction.name = `Query-${schema.getName()}`;
 
     actions.push(queryAction);
   }
@@ -34,6 +35,7 @@ export function getActions(authToken: string, apiEndpoint: string): Action[] {
   actions.push(new DatastoreSearchAction(authToken, apiEndpoint));
   actions.push(new UniversalSearchAction(authToken, apiEndpoint));
   actions.push(new ChatSearchAction(authToken, apiEndpoint));
+  actions.push(new DatastoreGetRecordAction(authToken, apiEndpoint));
 
   return actions;
 }
