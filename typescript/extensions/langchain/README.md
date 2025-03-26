@@ -37,12 +37,15 @@ yarn install @verida/personalagentkit
 
 ```typescript
   import { PersonalAgentKit, PersonalAgentKitOptions } from "@verida/personalagentkit";
+  import { getLangChainTools } from "@verida/personalagentkit-langchain";
 
   // Initialize AgentKit
   const personalAgentkit = await PersonalAgentKit.from(<PersonalAgentKitOptions>{
     veridaApiKey: process.env.VERIDA_API_KEY,
     veridaApiEndpoint: process.env.VERIDA_API_ENDPOINT || undefined,
   });
+
+  const tools = await getLangChainTools(personalAgentkit);
 ```
 
 ### Use the agent's actions with a framework extension. For example, using LangChain + OpenAI.
