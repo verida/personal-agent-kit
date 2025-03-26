@@ -66,7 +66,7 @@ async function initializeAgent() {
     // Store buffered conversation history in memory
     const memory = new MemorySaver();
     const agentConfig = {
-      configurable: { thread_id: "PersonalAgentKit Chatbot Example" }
+      configurable: { thread_id: "PersonalAgentKit Chatbot Example" },
     };
 
     // Create React Agent using the LLM and Verida PersonalAgentKit tools

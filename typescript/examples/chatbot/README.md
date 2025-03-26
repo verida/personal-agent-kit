@@ -1,4 +1,4 @@
-# Verida personalAgentKit LangChain Extension Examples - Chatbot Typescript
+# Verida PersonalAgentKit LangChain Extension Examples - Chatbot Typescript
 
 This example demonstrates an agent setup as a terminal style chatbot with access to the full set of Verida PersonalAgentKit actions.
 
@@ -31,23 +31,22 @@ This will automatically install and use the latest version of Node.
 
 #### Verida API Key
 
-You will need to obtain a [Verida AI API key]() for accessing user data. You need to:
+You will need to obtain a Verida AI API key] for accessing user data.
 
-1. [Register a Verida developer account](https://docs.verida.ai/getting-started/developer-console) &mdash; so you can obtain API keys for a user account
-2. [Create a Verida Vault account](https://docs.verida.ai/resources/verida-vault) &mdash; so you can securely extract your data from web2
-3. [Obtain your user API key](https://admin.verida.ai/) &mdash; Login to the Developer Console and use the Developer Sandbox to build a user request to obtain an API key
+See [Get a VERIDA API key](https://docs.verida.ai/getting-started/get-an-api-key)
+ from the Verida documentation.
 
+You will also need to configure a LLM to use. See [Which LLM to use]](https://docs.verida.ai/integrations/langgraph#which-llm-to-use) from the Verida documentation on some good options.
 
-You will also need to obtain an [OpenAI API Key](https://platform.openai.com/docs/quickstart#create-and-export-an-api-key) for LLM access. It is possible to use an alternative OpenAI compatible API; for example [RedPill AI](https://red-pill.ai/) which runs in a Trusted Execution Environment for maximum privacy.
 
 Once you have them, rename the `.env-local` file to `.env` and make sure you set the API keys to their corresponding environment variables:
 
 - "VERIDA_API_KEY" &mdash; API Auth Token obtained from the user
-- "OPENAI_API_KEY" &mdash; API Key obtained from OpenAI
+- "OPENAI_API_KEY" &mdash; API Key obtained from OpenAI or another OpenAI compatible service
 
 You can also configure additional optional configuration parameters:
 
-- "OPENAI_MODEL"
+- "OPENAI_MODEL" &mdash; ie: 
 - "OPENAI_BASE_URL"
 - "DEBUG" &mdash; OpenAI request / response output
 - "VERIDA_DEBUG" &mdash; Verida AI tool calling output
