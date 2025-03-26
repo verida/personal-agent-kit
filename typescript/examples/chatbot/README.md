@@ -36,7 +36,7 @@ You will need to obtain a Verida AI API key] for accessing user data.
 See [Get a VERIDA API key](https://docs.verida.ai/getting-started/get-an-api-key)
  from the Verida documentation.
 
-You will also need to configure a LLM to use. See [Which LLM to use]](https://docs.verida.ai/integrations/langgraph#which-llm-to-use) from the Verida documentation on some good options.
+You will also need to configure a LLM to use. See [Which LLM to use]](https://docs.verida.ai/overview/langgraph#which-llm-to-use) from the Verida documentation on some good options.
 
 
 Once you have them, rename the `.env-local` file to `.env` and make sure you set the API keys to their corresponding environment variables:

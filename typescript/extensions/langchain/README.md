@@ -18,7 +18,7 @@ PersonalAgentKit is a framework for easily enabling AI agents to access private 
 *Prerequisites*:
 - [Node.js 20+](https://nodejs.org/en/download/)
 - [Verida API key](https://docs.verida.ai/getting-started/get-an-api-key)
-- [Open AI Compatible API Key](https://docs.verida.ai/integrations/langgraph#which-llm-to-use)
+- [Open AI Compatible API Key](https://docs.verida.ai/integrations/overview#which-llm-to-use)
 
 ## Installation
 
