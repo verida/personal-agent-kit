@@ -2,7 +2,10 @@
   "name": "@verida/personalagentkit-langchain",
   "version": "0.1.0",
   "description": "Langchain Toolkit extension of Verida PersonalAgentkit",
-  "repository": "https://github.com/verida/personalagentkit",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/verida/personalagentkit.git"
+  },
   "author": "Verida",
   "license": "Apache-2.0",
   "main": "dist/index.js",
