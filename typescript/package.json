@@ -23,7 +23,7 @@
     "license": "Apache-2.0",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/verida/personalagentkit.git"
+        "url": "git+https://github.com/verida/personal-agent-kit.git"
     },
     "keywords": [
         "verida",

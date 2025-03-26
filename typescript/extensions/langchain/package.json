@@ -4,7 +4,7 @@
   "description": "Langchain Toolkit extension of Verida PersonalAgentkit",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/verida/personalagentkit.git"
+    "url": "git+https://github.com/verida/personal-agent-kit.git"
   },
   "author": "Verida",
   "license": "Apache-2.0",
