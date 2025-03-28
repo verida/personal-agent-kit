@@ -1,2 +1,2 @@
 
-See https://docs.verida.ai/integrations/overview
+See https://docs.verida.ai/integrations/personalagentkit and https://docs.verida.ai/integrations/langgraph
